@@ -27,6 +27,15 @@ public class ContatoFrontService {
 		return new ArrayList<Contato>(Arrays.asList(response.getBody()));
 	}
 	
+	public Contato getContato(Long id){
+		RestTemplate restTemplate = new RestTemplate();
+		
+		
+		ResponseEntity<Contato> response =  restTemplate.getForEntity(
+			url+"/"+id.toString(), Contato.class);
+		return response.getBody();
+	}
+	
 	public Contato postContato(Contato contato) {
 		
 		RestTemplate restTemplate = new RestTemplate();
