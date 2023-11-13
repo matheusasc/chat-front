@@ -53,7 +53,7 @@ public class ContatoFrontService {
 		return response.getBody();
 	}
 	
-	public Contato putContato(Contato contato, long id) {
+	public Contato putContato(long id, Contato contato) {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -70,9 +70,23 @@ public class ContatoFrontService {
 						Contato.class);
 		return response.getBody();
 	}
+
 	
 	public void deleteContato(long id) {
-		
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		HttpEntity<Contato> requestBody = new HttpEntity<>(new Contato(), headers);
+
+		String urlPut = url + "/" + Long.toString(id);
+		ResponseEntity<Contato> response =
+				restTemplate.exchange(urlPut,
+						HttpMethod.DELETE,
+						requestBody,
+						Contato.class);
 	}
 	
 }

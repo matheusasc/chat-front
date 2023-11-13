@@ -6,6 +6,9 @@
 </head>
 <body>
 	<h2>Lista de Contatos</h2>
+	<form action="#" th:action="@{'/contato/novo'}" th:method="get" >
+		<button type="submit" class="btn">Novo contato</button>
+	</form>
 	<div th:unless="${#lists.isEmpty(contatos)}">
 		<table>
 		    <tr>
@@ -29,6 +32,11 @@
 		        <td class="align-middle">
 					<form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:method="put" >
 						<button type="submit" class="btn">Alterar</button>
+					</form>
+				</td>
+				<td class="align-middle">
+					<form action="#" th:action="@{'/mensagem/{id}'(id=${contato.id})}" th:method="post" >
+						<button type="submit" class="btn">Mensagens</button>
 					</form>
 				</td>
 		    </tr>

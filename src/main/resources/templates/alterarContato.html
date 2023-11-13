@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Alterar Contato</h1>
-	<form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:object="${contato}" method="put">
+	<form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:object="${contato}" th:method="put">
 	    <label for="nome">Nome</label>
 	    <input type="text" th:field="*{nome}" id="nome" placeholder="Nome">
 	    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>

@@ -29,7 +29,7 @@ public class ContatoFrontController {
 		return "listaContatos";
 		
 	}
-	
+		
 	@GetMapping("/novo")
 	public String novoContato(Contato contato) {
 		return "novoContato";
@@ -56,14 +56,14 @@ public class ContatoFrontController {
     @PutMapping("/{id}")
     public String alterarContato(@PathVariable long id,
     		@Validated Contato contato, BindingResult result, Model model) {
-    	contatoFrontService.putContato(contato, id);
+    	contatoFrontService.putContato(id, contato);
     	return "redirect:/contato";
     }
     
     
     @DeleteMapping("/{id}")
     public String excluirContato(@PathVariable long id) {
-    	System.out.println("Excluindo: "+Long.toString(id));
+    	contatoFrontService.deleteContato(id);
     	return "redirect:/contato";
     }
     
