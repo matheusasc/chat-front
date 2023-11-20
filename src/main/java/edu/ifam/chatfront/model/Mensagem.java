@@ -11,9 +11,13 @@ public class Mensagem {
 	
 	@NotBlank
 	private Calendar dataHora;
-	@Email
 	@NotBlank
 	private String conteudo;
+	@NotBlank
+	private Contato emissor;
+	@NotBlank
+	private Contato receptor;
+
 	
 	
 	public Long getId() {
@@ -33,6 +37,18 @@ public class Mensagem {
 	}
 	public void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
+	}
+	public Contato getEmissor() {
+		return emissor;
+	}
+	public void setEmissor(Contato emissor) {
+		this.emissor = emissor;
+	}
+	public Contato getReceptor() {
+		return receptor;
+	}
+	public void setReceptor(Contato receptor) {
+		this.receptor = receptor;
 	}
 	
 	

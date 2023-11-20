@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Enviar Mensagem</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #808080; /* Cinza escuro */
+            color: #fff; 
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #dff0d8; /* Verde claro */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enviar Mensagem</h2>
+    <form action="/mensagens/mensagem/enviar" method="post">
+
+        <label for="contatoId">ID do Contato:</label>
+        <input type="text" id="contatoId" name="contatoId" required>
+
+
+        <label for="conteudo">Conteúdo:</label>
+        <input type="text" id="conteudo" name="conteudo" required>
+
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

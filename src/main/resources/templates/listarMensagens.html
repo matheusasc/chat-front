@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Mensagens</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #808080; /* Cinza escuro */
+            color: #fff; /* Texto branco */
+            text-align: center; /* Centraliza o conteúdo da página */
+        }
+
+        table {
+            width: 50%;
+            margin: 0 auto; /* Centraliza a tabela na página */
+            background-color: #dff0d8; /* Verde claro */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .enviar-button {
+            background-color: #5bc0de; /* azul claro */
+            color: #fff;
+            padding: 8px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block; 
+            margin-top: 20px;
+        }
+
+
+        .mensagem-enviada {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #5bc0de; /* azul claro */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Mensagens</h2>
+
+    <form th:action="@{'/mensagens/nova/' + ${contatoId}}" method="get">
+        <button class="enviar-button" type="submit">Enviar Mensagem</button>
+    </form>
+
+
+    <div th:if="${mensagemEnviada != null}" class="mensagem-enviada">
+        <h3>Mensagem Enviada para o ID ${contatoId}</h3>
+        <p>Data/Hora: <span th:text="${mensagemEnviada.dataHora}"></span></p>
+        <p>Conteúdo: <span th:text="${mensagemEnviada.conteudo}"></span></p>
+        <p>Emissor: <span th:text="${mensagemEnviada.emissor.nome}"></span></p>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Data/Hora</th>
+                <th>Conteúdo</th>
+                <th>Emissor</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="mensagem : ${mensagens}">
+                <td th:text="${mensagem.dataHora}"></td>
+                <td th:text="${mensagem.conteudo}"></td>
+                <td th:text="${mensagem.emissor.nome}"></td>
+                <td>
+
+                </td>
+            </tr>
+            
+            <tr th:if="${#lists.isEmpty(mensagens)}">
+                <td colspan="4">Nenhuma mensagem encontrada.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,46 +1,118 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Getting Started: Serving Web Content</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
+<head>
+    <title>Lista de Contatos</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #808080;
+        }
+
+        h2 {
+            color: #fff;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #dff0d8; /* verde claro */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            padding: 8px;
+            margin: 4px;
+            cursor: pointer;
+        }
+
+        .btn-novo {
+            background-color: #5bc0de; /* azul claro */
+            color: #fff;
+            text-align: left;
+        }
+
+        .btn-excluir {
+            background-color: #d9534f; /* vermelho */
+            color: #fff;
+        }
+
+        .btn-alterar {
+            background-color: #f0ad4e; /* laranja */
+            color: #fff;
+        }
+
+        .btn-mensagens {
+            background-color: #5bc0de; /* azul claro */
+            color: #fff;
+        }
+
+        .align-middle {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
 <body>
-	<h2>Lista de Contatos</h2>
-	<form action="#" th:action="@{'/contato/novo'}" th:method="get" >
-		<button type="submit" class="btn">Novo contato</button>
-	</form>
-	<div th:unless="${#lists.isEmpty(contatos)}">
-		<table>
-		    <tr>
-		        <th>Nome</th>
-		        <th>Email</th>
-		        <th>Telefone</th>
-		        <th>Endereço</th>
-		        <th></th>
-		        <th></th>
-		    </tr>
-		    <tr th:each="contato : ${contatos}">
-		        <td class="align-middle" th:text="${contato.nome}"></td>
-		        <td class="align-middle" th:text="${contato.email}"></td>
-		        <td class="align-middle" th:text="${contato.telefone}"></td>
-		        <td class="align-middle" th:text="${contato.endereco}"></td>
-		        <td class="align-middle">
-					<form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:method="delete" >
-						<button type="submit" class="btn">Excluir</button>
-					</form>
-				</td>
-		        <td class="align-middle">
-					<form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:method="put" >
-						<button type="submit" class="btn">Alterar</button>
-					</form>
-				</td>
-				<td class="align-middle">
-					<form action="#" th:action="@{'/mensagem/{id}'(id=${contato.id})}" th:method="post" >
-						<button type="submit" class="btn">Mensagens</button>
-					</form>
-				</td>
-		    </tr>
-		</table>
-	</div>
+    <h2>Lista de Contatos</h2>
+    <form action="#" th:action="@{'/contato/novo'}" th:method="get">
+        <button type="submit" class="btn btn-novo">Novo contato</button>
+    </form>
+    <div th:unless="${#lists.isEmpty(contatos)}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Endereço</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="contato : ${contatos}">
+                    <td th:text="${contato.nome}" class="align-middle"></td>
+                    <td th:text="${contato.email}" class="align-middle"></td>
+                    <td th:text="${contato.telefone}" class="align-middle"></td>
+                    <td th:text="${contato.endereco}" class="align-middle"></td>
+                    <td class="align-middle">
+                        <form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:method="delete">
+                            <button type="submit" class="btn btn-excluir"><i class="fas fa-trash"></i> Excluir</button>
+                        </form>
+                    </td>
+                    <td class="align-middle">
+                        <form action="#" th:action="@{'/contato/{id}'(id=${contato.id})}" th:method="put">
+                            <button type="submit" class="btn btn-alterar"><i class="fas fa-edit"></i> Alterar</button>
+                        </form>
+                    </td>
+                    <td class="align-middle">
+                        <form th:action="@{'/mensagens/listar/' + ${contato.id}}" method="get">
+                            <button type="submit" class="btn btn-mensagens"><i class="fas fa-envelope"></i> Mensagens</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>
