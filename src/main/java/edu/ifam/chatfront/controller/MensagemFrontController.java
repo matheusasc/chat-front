@@ -1,5 +1,6 @@
 package edu.ifam.chatfront.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,17 @@ import org.springframework.web.client.RestTemplate;
 
 import edu.ifam.chatfront.model.Contato;
 import edu.ifam.chatfront.model.Mensagem;
+import edu.ifam.chatfront.service.ContatoFrontService;
+import edu.ifam.chatfront.service.MensagemFrontService;
 
 @Controller
 @RequestMapping("/mensagens")
 public class MensagemFrontController {
 	
-	   private final String apiUrl = "http://localhost:8080/mensagem"; 
+	@Autowired
+	MensagemFrontService mensagemFrontService;
+	
+	   private final String apiUrl = "http://localhost:8081/mensagem"; 
 
 	   @GetMapping("/nova/{id}")
 	   public String exibirFormularioEnvio(@PathVariable Long id, Model model) {
@@ -30,38 +36,10 @@ public class MensagemFrontController {
 	   }
 
 
-
-	   @PostMapping("/mensagem/enviar")
-	   public String enviarMensagem(@ModelAttribute Mensagem mensagem, BindingResult result, Model model) {
-	       try {
-
-	           Contato emissor = new Contato();
-	           emissor.setId(1L); 
-
-	           Contato receptor = new Contato();
-	           receptor.setId(2L); 
-
-	           mensagem.setEmissor(emissor);
-	           mensagem.setReceptor(receptor);
-
-	           RestTemplate restTemplate = new RestTemplate();
-	           ResponseEntity<Mensagem> response = restTemplate.postForEntity(apiUrl + "/mensagem/enviar", mensagem, Mensagem.class);
-
-	           if (response.getStatusCode() == HttpStatus.OK) {
-	               Mensagem mensagemEnviada = response.getBody();
-	               model.addAttribute("mensagemEnviada", mensagemEnviada);
-	           } else {
-
-	               model.addAttribute("ErroEnvio", true);
-	           }
-	       } catch (HttpClientErrorException e) {
-	           model.addAttribute("ErroEnvio", true);
-	       }
+	   @PostMapping("/nova")
+	   public String enviarMensagem(Long idReceptor) {
 	       return "enviarMensagem";
 	   }
-
-
-
 
 
 	    @GetMapping("/listar/{id}")

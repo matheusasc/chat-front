@@ -21,6 +21,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            text-align: start;
         }
 
         label, input {
@@ -31,17 +32,26 @@
 </head>
 <body>
     <h2>Enviar Mensagem</h2>
-    <form action="/mensagens/mensagem/enviar" method="post">
+    <form action="#"  th:action="@{/mensagem}" th:object="${mensagem} "method="post">
+		
+		<label for="conteudo">Data e Hora:</label>
+        <input type="text" th:field="*{dataHora}" id="dataHora" name="dataHora" required>
+        <span th:if="${#fields.hasErrors('dataHora')}" th:errors="*{dataHora}"></span>
+		
+		<label for="conteudo">Conteúdo:</label>
+        <input type="text" th:field="*{conteudo}" id="conteudo" name="conteudo" required>
+        <span th:if="${#fields.hasErrors('conteudo')}" th:errors="*{conteudo}"></span>
 
-        <label for="contatoId">ID do Contato:</label>
-        <input type="text" id="contatoId" name="contatoId" required>
+        <label for="contatoId">ID emissor:</label>
+        <input type="text" th:field="*{emissor}" id="emissor" name="emissor" required>
+        <span th:if="${#fields.hasErrors('emissor')}" th:errors="*{emissor}"></span>
+        
+        <label for="contatoId">ID receptor:</label>
+        <input type="text" th:field="*{receptor}" id="receptor" name="receptor" required>
+        <span th:if="${#fields.hasErrors('receptor')}" th:errors="*{receptor}"></span>
 
 
-        <label for="conteudo">Conteúdo:</label>
-        <input type="text" id="conteudo" name="conteudo" required>
-
-
-        <button type="submit">Enviar</button>
+        <button type="submit" value="Enviar Mensagem">Enviar</button>
     </form>
 </body>
 </html>

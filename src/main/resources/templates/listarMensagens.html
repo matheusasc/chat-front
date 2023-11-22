@@ -63,27 +63,20 @@
     </form>
 
 
-    <div th:if="${mensagemEnviada != null}" class="mensagem-enviada">
-        <h3>Mensagem Enviada para o ID ${contatoId}</h3>
-        <p>Data/Hora: <span th:text="${mensagemEnviada.dataHora}"></span></p>
-        <p>Conteúdo: <span th:text="${mensagemEnviada.conteudo}"></span></p>
-        <p>Emissor: <span th:text="${mensagemEnviada.emissor.nome}"></span></p>
-    </div>
-    
     <table>
         <thead>
             <tr>
                 <th>Data/Hora</th>
                 <th>Conteúdo</th>
                 <th>Emissor</th>
-                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="mensagem : ${mensagens}">
                 <td th:text="${mensagem.dataHora}"></td>
                 <td th:text="${mensagem.conteudo}"></td>
-                <td th:text="${mensagem.emissor.nome}"></td>
+                <td th:text="${mensagem.emissor}"></td>
+                <td th:text="${mensagem.receptor}"></td>
                 <td>
 
                 </td>
