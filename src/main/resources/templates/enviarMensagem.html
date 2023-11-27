@@ -32,26 +32,25 @@
 </head>
 <body>
     <h2>Enviar Mensagem</h2>
-    <form action="#"  th:action="@{/mensagem}" th:object="${mensagem} "method="post">
+    <form th:action="@{'/mensagens/nova/' + ${id}}" th:object="${mensagem}" method="post">
 		
-		<label for="conteudo">Data e Hora:</label>
-        <input type="text" th:field="*{dataHora}" id="dataHora" name="dataHora" required>
+		<label for="dataHora">Data e Hora:</label>
+        <input type="text" th:field="*{dataHora}" id="dataHora" placeholder="DataHora" required>
         <span th:if="${#fields.hasErrors('dataHora')}" th:errors="*{dataHora}"></span>
 		
 		<label for="conteudo">Conteúdo:</label>
-        <input type="text" th:field="*{conteudo}" id="conteudo" name="conteudo" required>
+        <input type="text" th:field="*{conteudo}" id="conteudo" placeholder="Conteudo" required>
         <span th:if="${#fields.hasErrors('conteudo')}" th:errors="*{conteudo}"></span>
 
-        <label for="contatoId">ID emissor:</label>
-        <input type="text" th:field="*{emissor}" id="emissor" name="emissor" required>
+        <label for="emissor">ID emissor:</label>
+        <input type="text" th:field="*{emissor}" id="emissor" placeholder="Emissor" required>
         <span th:if="${#fields.hasErrors('emissor')}" th:errors="*{emissor}"></span>
         
-        <label for="contatoId">ID receptor:</label>
-        <input type="text" th:field="*{receptor}" id="receptor" name="receptor" required>
+        <label for="receptor">ID receptor:</label>
+        <input type="text" th:field="*{receptor}" id="receptor" placeholder="Receptor" required>
         <span th:if="${#fields.hasErrors('receptor')}" th:errors="*{receptor}"></span>
 
-
-        <button type="submit" value="Enviar Mensagem">Enviar</button>
+		<input type="submit" value="Enviar Mensagem">
     </form>
 </body>
 </html>

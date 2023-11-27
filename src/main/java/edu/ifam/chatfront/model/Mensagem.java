@@ -2,21 +2,27 @@ package edu.ifam.chatfront.model;
 
 import java.util.Calendar;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class Mensagem {
 	
 	private Long id;
 	
-	@NotBlank
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Calendar dataHora;
 	@NotBlank
 	private String conteudo;
-	@NotBlank
-	private Contato emissor;
-	@NotBlank
-	private Contato receptor;
+	@NotNull
+	private Long emissor;
+	@NotNull
+	private Long receptor;
 
 	
 	
@@ -38,16 +44,16 @@ public class Mensagem {
 	public void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
 	}
-	public Contato getEmissor() {
+	public Long getEmissor() {
 		return emissor;
 	}
-	public void setEmissor(Contato emissor) {
+	public void setEmissor(Long emissor) {
 		this.emissor = emissor;
 	}
-	public Contato getReceptor() {
+	public Long getReceptor() {
 		return receptor;
 	}
-	public void setReceptor(Contato receptor) {
+	public void setReceptor(Long receptor) {
 		this.receptor = receptor;
 	}
 	

@@ -21,7 +21,7 @@ public class MensagemFrontService {
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<Mensagem[]> response = restTemplate.getForEntity(
-            url + "/contato/" + id, Mensagem[].class);
+            url + "/mensagem/" + id, Mensagem[].class);
 
         return new ArrayList<Mensagem>(Arrays.asList(response.getBody()));
     }
