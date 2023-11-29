@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import edu.ifam.chat.chatfront.DTO.MensagemDTO;
 import edu.ifam.chatfront.model.Mensagem;
 
 @Service
@@ -26,14 +27,14 @@ public class MensagemFrontService {
         return new ArrayList<Mensagem>(Arrays.asList(response.getBody()));
     }
 
-    public Mensagem postMensagem(Mensagem mensagem) {
+    public Mensagem postMensagem(MensagemDTO mensagem) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<Mensagem> requestBody = new HttpEntity<>(mensagem, headers);
+        HttpEntity<MensagemDTO> requestBody = new HttpEntity<>(mensagem, headers);
 
         ResponseEntity<Mensagem> response = restTemplate.postForEntity(
             url,

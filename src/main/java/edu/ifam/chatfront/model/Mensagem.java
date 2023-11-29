@@ -57,6 +57,16 @@ public class Mensagem {
 		this.receptor = receptor;
 	}
 	
+	public Mensagem(Long id, Calendar dataHora, String conteudo, Contato emissor, Contato receptor) {
+		super();
+		this.id = id;
+		this.dataHora = dataHora;
+		this.conteudo = conteudo;
+	}
+	
+	public Mensagem() {
+		
+	}
 	
 
 }

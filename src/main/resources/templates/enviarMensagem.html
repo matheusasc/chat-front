@@ -42,14 +42,19 @@
         <input type="text" th:field="*{conteudo}" id="conteudo" placeholder="Conteudo" required>
         <span th:if="${#fields.hasErrors('conteudo')}" th:errors="*{conteudo}"></span>
 
-        <label for="emissor">ID emissor:</label>
-        <input type="text" th:field="*{emissor}" id="emissor" placeholder="Emissor" required>
-        <span th:if="${#fields.hasErrors('emissor')}" th:errors="*{emissor}"></span>
-        
-        <label for="receptor">ID receptor:</label>
-        <input type="text" th:field="*{receptor}" id="receptor" placeholder="Receptor" required>
-        <span th:if="${#fields.hasErrors('receptor')}" th:errors="*{receptor}"></span>
+     	<label for="emissor">ID emissor:</label>
+		<select th:field="*{emissorId}" id="emissor" required>
+		    <option th:each="contato : ${contatos}" th:value="${contato.id}" th:text="${contato.id}"></option>
+		</select>
+		<span th:if="${#fields.hasErrors('emissorId')}" th:errors="*{emissorId}"></span>
+		
+		<label for="receptor">ID receptor:</label>
+		<select th:field="*{receptorId}" id="receptor" required>
+		    <option th:each="contato : ${contatos}" th:value="${contato.id}" th:text="${contato.id}"></option>
+		</select>
+		<span th:if="${#fields.hasErrors('receptorId')}" th:errors="*{receptorId}"></span>
 
+     
 		<input type="submit" value="Enviar Mensagem">
     </form>
 </body>
